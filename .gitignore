@@ -2,3 +2,18 @@ __pycache__/
 *.pyc
 .DS_Store
 Thumbs.db
+
+# Development / build / test files (kept locally, not part of the live site)
+build_index_html.py
+generate_translations.py
+js/build_main_js.py
+take_screenshots.py
+test_i18n_integrity.py
+test_interactive_calculator.js
+test_node.js
+verify_dom_languages.py
+
+# Debug / duplicate source images (not used by the site)
+screenshot_debug.png
+790591020_122095760121467429_6253714430052483979_n.jpg
+ChatGPT Image *.png
