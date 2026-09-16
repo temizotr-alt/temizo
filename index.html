@@ -235,6 +235,18 @@
         <div class="hero-visual-wrapper">
           <div class="hero-visual-card">
             <img id="heroMainImage" src="assets/images/banner-apartment.png" alt="طاقم تميزو لتنظيف الشقق في اسطنبول" data-i18n-alt="hero_img_alt" class="hero-main-img">
+            <script>
+              /* Set the hero banner to match ?lang immediately, before the Arabic default paints */
+              (function () {
+                try {
+                  var p = new URLSearchParams(location.search).get('lang');
+                  if (p === 'en' || p === 'tr') {
+                    var img = document.getElementById('heroMainImage');
+                    if (img) img.src = 'assets/images/banner-' + (p === 'tr' ? 'turkish.jpg' : 'english.jpg');
+                  }
+                } catch (e) {}
+              })();
+            </script>
 
             <!-- Floating Trust Badges -->
             <div class="floating-badge badge-top" id="heroFloatingBadge">

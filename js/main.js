@@ -146,6 +146,19 @@ function initHeroSwitcher() {
       }
     });
   });
+
+  // Preload English & Turkish hero banners so language switching is instant (no Arabic flash)
+  const preloadHeroBanners = () => {
+    ['assets/images/banner-english.jpg', 'assets/images/banner-turkish.jpg'].forEach(src => {
+      const im = new Image();
+      im.src = src;
+    });
+  };
+  if ('requestIdleCallback' in window) {
+    requestIdleCallback(preloadHeroBanners, { timeout: 3000 });
+  } else {
+    setTimeout(preloadHeroBanners, 2000);
+  }
 }
 
 /* ==========================================================================
