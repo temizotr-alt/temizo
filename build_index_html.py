@@ -1,0 +1,1217 @@
+# -*- coding: utf-8 -*-
+import os
+
+html_content = """<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title data-i18n="doc_title">تميزو (TEMiZO) | خدمات تنظيف احترافية وفورية في كافة مناطق اسطنبول</title>
+  <meta name="description" id="metaDescription" data-i18n-content="doc_desc" content="شركة تميزو لخدمات التنظيف الاحترافية والفورية في كافة مناطق اسطنبول - شقق، فلل، مكاتب، تنظيف ما بعد التشطيب، غسيل كنب ومفروشات، تعقيم شامل. نسبة رضا 98% وسرعة فائقة.">
+  <meta name="keywords" id="metaKeywords" data-i18n-content="doc_keywords" content="تنظيف اسطنبول, شركة تنظيف في اسطنبول, تنظيف شقق, تنظيف فلل, تنظيف مكاتب, خدمة تنظيف فورية, تميزو تنظيف, TEMiZO">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/jpeg" href="assets/images/logo.jpg">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- 3D WebGL Interactive Soap Bubbles Scene (Three.js) -->
+  <div id="webgl-bubbles-container" class="webgl-canvas-container" aria-hidden="true"></div>
+
+  <!-- Interactive Dual-Ring Bubble Cursor -->
+  <div class="bubble-cursor-dot" id="cursorDot" aria-hidden="true"></div>
+  <div class="bubble-cursor-ring" id="cursorRing" aria-hidden="true"></div>
+
+  <!-- Top Notification Bar (Fast Immediate Istanbul Coverage) -->
+  <div class="top-bar">
+    <div class="container top-bar-inner">
+      <div style="display: flex; align-items: center; gap: 0.6rem;">
+        <span style="color: var(--teal-light);"><i class="fa-solid fa-bolt-lightning"></i> <span id="topBarLabel" data-i18n="topbar_label">خدمة فورية وسريعة:</span></span>
+        <span id="topBarText" data-i18n="topbar_text">تغطية شاملة لكافة مناطق اسطنبول | طواقم جاهزة للانطلاق الفوري | نسبة رضا الزبائن تصل إلى 98%!</span>
+      </div>
+      <div style="display: flex; align-items: center; gap: 1.25rem;">
+        <a href="tel:+905435110530" style="color: #fff; display: flex; align-items: center; gap: 0.4rem; direction: ltr; font-weight: 600;">
+          <i class="fa-solid fa-phone" style="color: var(--teal-light);"></i> +90 543 511 0530
+        </a>
+        <span style="color: rgba(255,255,255,0.3);">|</span>
+        <div class="lang-switcher" style="display: flex; gap: 0.5rem; font-size: 0.78rem;">
+          <span class="lang-btn active" data-lang="ar" data-i18n="lang_ar_btn" style="color: var(--teal-light); font-weight: 700; cursor: pointer;">العربية</span>
+          <span style="color: rgba(255,255,255,0.5);">•</span>
+          <span class="lang-btn" data-lang="tr" data-i18n="lang_tr_btn" style="color: rgba(255,255,255,0.7); cursor: pointer;">Türkçe</span>
+          <span style="color: rgba(255,255,255,0.5);">•</span>
+          <span class="lang-btn" data-lang="en" data-i18n="lang_en_btn" style="color: rgba(255,255,255,0.7); cursor: pointer;">English</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Sticky Header -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <!-- Brand Logo -->
+      <a href="#home" class="brand-logo-container">
+        <img src="assets/images/logo.jpg" alt="TEMiZO" class="brand-logo-img">
+        <div class="brand-logo-text">
+          <div class="brand-logo-title">TEM<span>i</span>ZO</div>
+          <div class="brand-logo-desc">PROFESYONEL TEMİZLİK</div>
+        </div>
+      </a>
+
+      <!-- Desktop Navigation Links -->
+      <nav class="main-nav">
+        <a href="#home" class="nav-link" data-i18n="nav_home">الرئيسية</a>
+        <a href="#services" class="nav-link" data-i18n="nav_services">خدماتنا</a>
+        <a href="#calculator" class="nav-link" data-i18n="nav_quote">طلب تسعيرة</a>
+        <a href="#before-after" class="nav-link" data-i18n="nav_before_after">قبل وبعد</a>
+        <a href="#why-us" class="nav-link" data-i18n="nav_why_us">لماذا تميزو؟</a>
+        <a href="#coverage" class="nav-link" data-i18n="nav_coverage">مناطق التغطية</a>
+        <a href="#testimonials" class="nav-link" data-i18n="nav_testimonials">آراء العملاء</a>
+        <a href="#faq" class="nav-link" data-i18n="nav_faq">الأسئلة الشائعة</a>
+      </nav>
+
+      <!-- Header Action Buttons -->
+      <div class="header-actions">
+        <!-- Language Switcher Pill -->
+        <div class="header-lang-pill">
+          <button class="header-lang-btn active" data-lang="ar" data-i18n="header_lang_ar">عربي</button>
+          <button class="header-lang-btn" data-lang="tr" data-i18n="header_lang_tr">TR</button>
+          <button class="header-lang-btn" data-lang="en" data-i18n="header_lang_en">EN</button>
+        </div>
+
+        <a href="tel:+905435110530" class="header-phone-btn" data-i18n-title="header_call_title" title="اتصل بنا">
+          <i class="fa-solid fa-phone" style="color: var(--teal-primary);"></i>
+          <span>0543 511 0530</span>
+        </a>
+
+        <a href="https://wa.me/905435110530?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%20%D8%AA%D9%85%D9%8A%D8%B2%D9%88%D8%8C%20%D8%A3%D9%88%D8%AF%20%D8%A7%D9%84%D8%A7%D8%B3%D8%AA%D9%81%D8%B3%D8%A7%D8%B1%20%D8%B9%D9%86%20%D8%AE%D8%AF%D9%85%D8%A7%D8%AA%20%D8%A7%D9%84%D8%AA%D9%86%D8%B8%D9%8A%D9%81%20%D8%A7%D9%84%D9%81%D9%88%D8%B1%D9%8A%D8%A9%20%D9%81%D9%8A%20%D8%A7%D8%B3%D8%B7%D9%86%D8%A8%D9%88%D9%84" target="_blank" class="btn btn-whatsapp btn-sm">
+          <i class="fa-brands fa-whatsapp" style="font-size: 1.15rem;"></i>
+          <span id="headerWhatsAppActionText" data-i18n="header_whatsapp">راسلنا الآن</span>
+        </a>
+
+        <!-- Hamburger Toggle Button -->
+        <button class="nav-toggle" id="drawerOpenBtn" data-i18n-aria="drawer_aria_open" aria-label="تبديل القائمة">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Off-Canvas Mobile Drawer & Overlay -->
+  <div class="drawer-backdrop" id="drawerBackdrop"></div>
+  <div class="mobile-drawer" id="mobileDrawer">
+    <div class="drawer-header">
+      <div class="brand-logo-container">
+        <img src="assets/images/logo.jpg" alt="TEMiZO" style="height: 38px; border-radius: 6px;">
+        <div class="brand-logo-text">
+          <span style="font-family: var(--font-en); font-weight: 800; color: var(--navy-primary); font-size: 1.2rem;">TEM<span style="color: var(--teal-primary);">i</span>ZO</span>
+        </div>
+      </div>
+      <button class="drawer-close" id="drawerCloseBtn" data-i18n-aria="drawer_aria_close" aria-label="إغلاق">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+
+    <!-- Drawer Navigation Links -->
+    <nav class="drawer-nav">
+      <a href="#home" class="drawer-nav-link"><span data-i18n="nav_home">الرئيسية</span> <i class="fa-solid fa-chevron-left" style="font-size: 0.75rem;"></i></a>
+      <a href="#services" class="drawer-nav-link"><span data-i18n="nav_services">خدماتنا</span> <i class="fa-solid fa-chevron-left" style="font-size: 0.75rem;"></i></a>
+      <a href="#calculator" class="drawer-nav-link"><span data-i18n="nav_quote">طلب تسعيرة</span> <i class="fa-solid fa-chevron-left" style="font-size: 0.75rem;"></i></a>
+      <a href="#before-after" class="drawer-nav-link"><span data-i18n="nav_before_after">قبل وبعد</span> <i class="fa-solid fa-chevron-left" style="font-size: 0.75rem;"></i></a>
+      <a href="#why-us" class="drawer-nav-link"><span data-i18n="nav_why_us">لماذا تميزو؟</span> <i class="fa-solid fa-chevron-left" style="font-size: 0.75rem;"></i></a>
+      <a href="#coverage" class="drawer-nav-link"><span data-i18n="nav_coverage">مناطق التغطية</span> <i class="fa-solid fa-chevron-left" style="font-size: 0.75rem;"></i></a>
+      <a href="#testimonials" class="drawer-nav-link"><span data-i18n="nav_testimonials">آراء العملاء</span> <i class="fa-solid fa-chevron-left" style="font-size: 0.75rem;"></i></a>
+      <a href="#faq" class="drawer-nav-link"><span data-i18n="nav_faq">الأسئلة الشائعة</span> <i class="fa-solid fa-chevron-left" style="font-size: 0.75rem;"></i></a>
+    </nav>
+
+    <!-- Drawer Language Selector -->
+    <div style="margin-bottom: 1.5rem;">
+      <span data-i18n="drawer_lang_label" style="font-size: 0.8rem; color: var(--gray-500); font-weight: 600; display: block; margin-bottom: 0.5rem;">لغة العرض:</span>
+      <div style="display: flex; gap: 0.5rem;">
+        <button class="header-lang-btn active lang-btn" data-lang="ar" data-i18n="lang_ar_btn" style="flex: 1; border: 1px solid var(--gray-200); padding: 0.45rem;">العربية</button>
+        <button class="header-lang-btn lang-btn" data-lang="tr" data-i18n="lang_tr_btn" style="flex: 1; border: 1px solid var(--gray-200); padding: 0.45rem;">Türkçe</button>
+        <button class="header-lang-btn lang-btn" data-lang="en" data-i18n="lang_en_btn" style="flex: 1; border: 1px solid var(--gray-200); padding: 0.45rem;">English</button>
+      </div>
+    </div>
+
+    <!-- Drawer Action Buttons -->
+    <div class="drawer-actions">
+      <a href="tel:+905435110530" class="btn btn-navy btn-sm" style="width: 100%; justify-content: center;">
+        <i class="fa-solid fa-phone"></i>
+        <span data-i18n="drawer_call_btn">اتصل بنا: 0543 511 0530</span>
+      </a>
+      <a href="https://wa.me/905435110530?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%20%D8%AA%D9%85%D9%8A%D8%B2%D9%88%D8%8C%20%D8%A3%D9%88%D8%AF%20%D8%AD%D8%AC%D8%B2%20%D9%85%D9%88%D8%B9%D8%AF%20%D8%AA%D9%86%D8%B8%D9%8A%D9%81%20%D9%81%D9%88%D8%B1%D9%8A" target="_blank" class="btn btn-whatsapp btn-sm" style="width: 100%; justify-content: center;">
+        <i class="fa-brands fa-whatsapp"></i>
+        <span data-i18n="drawer_whatsapp_btn">مراسلة عبر واتساب</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- Hero Section -->
+  <section id="home" class="hero-section">
+    <div class="container">
+      <div class="hero-grid">
+        <!-- Hero Text Column -->
+        <div class="hero-content">
+          <div class="hero-badge">
+            <span class="sparkle-icon"></span>
+            <span id="heroBadgeText" data-i18n="hero_badge">الخدمة الفورية الأولى للتنظيف الفندقي والسكني في كافة مناطق اسطنبول</span>
+          </div>
+
+          <h1 class="hero-title" id="heroTitle" data-i18n="hero_title">
+            نظافة راقية وفورية<br>
+            <span class="gradient-text">لبيتك ومكتبك</span> في كافة مناطق اسطنبول
+          </h1>
+
+          <p class="hero-desc" id="heroDesc" data-i18n="hero_desc">
+            خدمات تنظيف فورية وسريعة بجودة استثنائية للشقق، الفلل، والمكاتب في كافة مناطق اسطنبول. سرعة فائقة في الاستجابة، كوادر محترفة وأمينة، مع نسبة رضا زبائن تصل إلى 98%.
+          </p>
+
+          <!-- 3 Feature Pillars (Speed, Verified Staff, 98% Satisfaction) -->
+          <div class="hero-pillars">
+            <div class="pillar-item">
+              <div class="pillar-icon-box">
+                <i class="fa-solid fa-bolt-lightning"></i>
+              </div>
+              <div class="pillar-text">
+                <h4 id="pillar1Title" data-i18n="pillar_1_title">خدمة فورية وسريعة</h4>
+                <p id="pillar1Desc" data-i18n="pillar_1_desc">طواقم جاهزة للانطلاق الفوري</p>
+              </div>
+            </div>
+
+            <div class="pillar-item">
+              <div class="pillar-icon-box">
+                <i class="fa-solid fa-users"></i>
+              </div>
+              <div class="pillar-text">
+                <h4 id="pillar2Title" data-i18n="pillar_2_title">فريق محترف 100%</h4>
+                <p id="pillar2Desc" data-i18n="pillar_2_desc">كوادر مدرّبة وموثوقة وأمينة</p>
+              </div>
+            </div>
+
+            <div class="pillar-item">
+              <div class="pillar-icon-box">
+                <i class="fa-solid fa-medal"></i>
+              </div>
+              <div class="pillar-text">
+                <h4 id="pillar3Title" data-i18n="pillar_3_title">نسبة رضا 98%</h4>
+                <p id="pillar3Desc" data-i18n="pillar_3_desc">خدمة فندقية نالت ثقة العملاء</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Hero CTAs -->
+          <div class="hero-cta-group">
+            <a href="https://wa.me/905435110530?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%20%D8%AA%D9%85%D9%8A%D8%B2%D9%88%D8%8C%20%D8%A3%D9%88%D8%AF%20%D8%AD%D8%AC%D8%B2%20%D9%85%D9%88%D8%B9%D8%AF%20%D8%AA%D9%86%D8%B8%D9%8A%D9%81%20%D9%81%D9%88%D8%B1%D9%8A" target="_blank" class="btn btn-whatsapp btn-lg" id="heroWhatsAppBtn">
+              <i class="fa-brands fa-whatsapp" style="font-size: 1.35rem;"></i>
+              <span id="heroWhatsAppText" data-i18n="hero_whatsapp_btn">راسلنا على واتساب الآن</span>
+              <i class="fa-solid fa-chevron-left" style="font-size: 0.85rem; margin-right: 0.25rem;"></i>
+            </a>
+
+            <a href="#calculator" class="btn btn-navy btn-lg" id="heroCalcBtn">
+              <i class="fa-solid fa-clipboard-list" style="color: var(--teal-light);"></i>
+              <span id="heroCalcText" data-i18n="hero_calc_btn">حدد المواصفات واطلب السعر</span>
+            </a>
+          </div>
+
+          <!-- Trust Sub-bar -->
+          <div class="hero-trust-bar">
+            <div class="trust-item">
+              <i class="fa-solid fa-medal"></i>
+              <span data-i18n="trust_satisfaction">نسبة رضا الزبائن 98%</span>
+            </div>
+            <div class="trust-item">
+              <i class="fa-solid fa-bolt"></i>
+              <span data-i18n="trust_instant">خدمة فورية في نفس اليوم</span>
+            </div>
+            <div class="trust-item">
+              <i class="fa-solid fa-map-location-dot"></i>
+              <span data-i18n="trust_coverage">تغطية لكافة مناطق اسطنبول</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Hero Visual Media Column -->
+        <div class="hero-visual-wrapper">
+          <div class="hero-visual-card">
+            <img id="heroMainImage" src="assets/images/banner-apartment.png" alt="طاقم تميزو لتنظيف الشقق في اسطنبول" data-i18n-alt="hero_img_alt" class="hero-main-img">
+
+            <!-- Floating Trust Badges -->
+            <div class="floating-badge badge-top" id="heroFloatingBadge">
+              <div class="badge-icon-wrap">
+                <i class="fa-solid fa-award"></i>
+              </div>
+              <div class="badge-info">
+                <strong id="badgeTopTitle" data-i18n="floating_top_title">تنظيف احترافي لشقتك</strong>
+                <span id="badgeTopSub" data-i18n="floating_top_sub">خدمة راقية وسريعة للشقق والمنازل</span>
+              </div>
+            </div>
+
+            <div class="floating-badge badge-bottom">
+              <div class="badge-icon-wrap" style="background: rgba(245, 158, 11, 0.15); color: var(--gold);">
+                <i class="fa-solid fa-star"></i>
+              </div>
+              <div class="badge-info">
+                <strong data-i18n="floating_bot_title">نسبة رضا 98%</strong>
+                <span data-i18n="floating_bot_desc">نسبة رضا من الزبائن تصل إلى 98% وتغطية فورية لكافة المناطق</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Quick Banner Switcher Tabs -->
+          <div class="hero-image-tabs">
+            <button class="hero-tab-btn active" data-target="apartment">
+              <i class="fa-solid fa-building"></i> <span id="tabApartmentText" data-i18n="tab_apartments">شقق ومنازل</span>
+            </button>
+            <button class="hero-tab-btn" data-target="office">
+              <i class="fa-solid fa-briefcase"></i> <span id="tabOfficeText" data-i18n="tab_offices">مكاتب وشركات</span>
+            </button>
+            <button class="hero-tab-btn" data-target="home">
+              <i class="fa-solid fa-house-chimney-window"></i> <span id="tabHomeText" data-i18n="tab_deep_clean">تنظيف شامل</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Quick Stats Banner -->
+  <section class="stats-banner">
+    <div class="container">
+      <div class="stats-grid">
+        <div class="stat-box">
+          <div class="stat-number" data-i18n="stat_1_num">98%</div>
+          <div class="stat-label" data-i18n="stat_1_label">نسبة رضا الزبائن</div>
+          <div class="stat-sub" data-i18n="stat_1_sub">تقييمات ممتازة وخدمة فندقية معتمدة</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-number" data-i18n="stat_2_num">فوري</div>
+          <div class="stat-label" data-i18n="stat_2_label">سرعة استجابة فائقة</div>
+          <div class="stat-sub" data-i18n="stat_2_sub">طواقم متأهبة لخدمتك في نفس اليوم</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-number" data-i18n="stat_3_num">100%</div>
+          <div class="stat-label" data-i18n="stat_3_label">تغطية لكافة مناطق اسطنبول</div>
+          <div class="stat-sub" data-i18n="stat_3_sub">وصول سريع لجميع الأحياء والمجمعات</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-number" data-i18n="stat_4_num">+20</div>
+          <div class="stat-label" data-i18n="stat_4_label">فريق متنقل ومحترف</div>
+          <div class="stat-sub" data-i18n="stat_4_sub">بأحدث المعدات والأجهزة الأوروبية</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services Section -->
+  <section id="services" class="section section-alt">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag">
+          <span class="sparkle-icon"></span>
+          <span data-i18n="services_tag">خدماتنا المتميزة</span>
+        </div>
+        <h2 class="section-title" data-i18n="services_title">حلول تنظيف شاملة وفورية تلبي كافة احتياجاتك في كافة مناطق اسطنبول</h2>
+        <p class="section-subtitle" data-i18n="services_subtitle">
+          نقدم أعلى معايير النظافة والتعقيم الفندقي للشقق السكنية، الفلل الفاخرة، مقرات الشركات والمكاتب بأيدي طواقم خبيرة ومواد متطورة.
+        </p>
+      </div>
+
+      <div class="services-grid">
+        <!-- Service 1: Apartments -->
+        <div class="service-card">
+          <div class="service-icon-wrap">
+            <i class="fa-solid fa-city"></i>
+          </div>
+          <h3 class="service-title" data-i18n="service_1_title">تنظيف الشقق والمنازل</h3>
+          <p class="service-desc" data-i18n="service_1_desc">
+            تنظيف عميق ودقيق لكافة أرجاء الشقة: غرف النوم، الصالونات، تنظيف وتطهير المطابخ وإزالة الدهون المستعصية، وتعقيم الحمامات والأرضيات وتلميع المرايا والزجاج.
+          </p>
+          <ul class="service-features">
+            <li><i class="fa-solid fa-circle-check"></i> <span data-i18n="service_1_f1">تنظيف شامل للغرف والممرات والأسقف</span></li>
+            <li><i class="fa-solid fa-circle-check"></i> <span data-i18n="service_1_f2">إزالة الدهون وتلميع دواليب المطبخ</span></li>
+            <li><i class="fa-solid fa-circle-check"></i> <span data-i18n="service_1_f3">تعقيم عميق للحمامات بمطهرات طبية</span></li>
+          </ul>
+          <button onclick="selectServiceAndScroll('prop_2plus1')" class="btn btn-outline btn-sm">
+            <span data-i18n="service_btn">تحديد المواصفات وطلب السعر</span>
+            <i class="fa-solid fa-arrow-left"></i>
+          </button>
+        </div>
+
+        <!-- Service 2: Offices -->
+        <div class="service-card">
+          <div class="service-icon-wrap">
+            <i class="fa-solid fa-briefcase"></i>
+          </div>
+          <h3 class="service-title" data-i18n="service_2_title">تنظيف المكاتب والشركات</h3>
+          <p class="service-desc" data-i18n="service_2_desc">
+            بيئة عمل نظيفة وصحية تعكس رقي علامتك التجارية. نظافة يومية أو أسبوعية دورية للمكاتب، قاعات الاجتماعات، مكاتب الاستقبال، وتطهير الأجهزة الإلكترونية والأرضيات.
+          </p>
+          <ul class="service-features">
+            <li><i class="fa-solid fa-circle-check"></i> <span data-i18n="service_2_f1">عقود مرنة (يومية، أسبوعية، أو شهرية)</span></li>
+            <li><i class="fa-solid fa-circle-check"></i> <span data-i18n="service_2_f2">تنظيف وتعقيم أجهزة الحاسوب والمكاتب</span></li>
+            <li><i class="fa-solid fa-circle-check"></i> <span data-i18n="service_2_f3">مواعيد عمل مبكرة أو بعد ساعات الدوام</span></li>
+          </ul>
+          <button onclick="selectServiceAndScroll('prop_office')" class="btn btn-outline btn-sm">
+            <span data-i18n="service_btn">تحديد المواصفات وطلب السعر</span>
+            <i class="fa-solid fa-arrow-left"></i>
+          </button>
+        </div>
+
+        <!-- Service 3: Villas -->
+        <div class="service-card">
+          <div class="service-icon-wrap">
+            <i class="fa-solid fa-house-chimney-window"></i>
+          </div>
+          <h3 class="service-title" data-i18n="service_3_title">تنظيف الفلل والقصور</h3>
+          <p class="service-desc" data-i18n="service_3_desc">
+            عناية استثنائية بالمساحات الواسعة، تنظيف الطوابق المتعددة، السلالم الداخلية، الواجهات الزجاجية المرتفعة، التراسات، ومداخل الفلل بأحدث المعدات والأجهزة البخارية.
+          </p>
+          <ul class="service-features">
+            <li><i class="fa-solid fa-circle-check"></i> <span data-i18n="service_3_f1">فرق عمل متكاملة ذات خبرة بالمساحات الكبيرة</span></li>
+            <li><i class="fa-solid fa-circle-check"></i> <span data-i18n="service_3_f2">تلميع الرخام، الباركيه، والنجف الكريستالي</span></li>
+            <li><i class="fa-solid fa-circle-check"></i> <span data-i18n="service_3_f3">تنظيف التراسات والزجاج والواجهات</span></li>
+          </ul>
+          <button onclick="selectServiceAndScroll('prop_villa')" class="btn btn-outline btn-sm">
+            <span data-i18n="service_btn">تحديد المواصفات وطلب السعر</span>
+            <i class="fa-solid fa-arrow-left"></i>
+          </button>
+        </div>
+
+        <!-- Service 4: Post Construction -->
+        <div class="service-card">
+          <div class="service-icon-wrap">
+            <i class="fa-solid fa-paint-roller"></i>
+          </div>
+          <h3 class="service-title" data-i18n="service_4_title">تنظيف ما بعد التشطيب والبناء</h3>
+          <p class="service-desc" data-i18n="service_4_desc">
+            إزالة آثار الدهان، بقع الجص والأسمنت، وتلميع الرخام والسيراميك بدقة دون إتلاف الأسطح. نسلمك منزلك أو مقرك الجديد جاهزاً ومشرقاً للسكن الفوري.
+          </p>
+          <ul class="service-features">
+            <li><i class="fa-solid fa-circle-check"></i> <span data-i18n="service_4_f1">إزالة بقايا الجبس والدهان واللاصق من النوافذ</span></li>
+            <li><i class="fa-solid fa-circle-check"></i> <span data-i18n="service_4_f2">جلي وتنظيف أرضيات السيراميك والباركيه</span></li>
+            <li><i class="fa-solid fa-circle-check"></i> <span data-i18n="service_4_f3">شفط الغبار الدقيق بمكانس صناعية قوية</span></li>
+          </ul>
+          <button onclick="selectServiceAndScroll('type_post_const')" class="btn btn-outline btn-sm">
+            <span data-i18n="service_btn">تحديد المواصفات وطلب السعر</span>
+            <i class="fa-solid fa-arrow-left"></i>
+          </button>
+        </div>
+
+        <!-- Service 5: Sofas & Upholstery (No Carpet) -->
+        <div class="service-card">
+          <div class="service-icon-wrap">
+            <i class="fa-solid fa-couch"></i>
+          </div>
+          <h3 class="service-title" data-i18n="service_5_title">غسيل وتعقيم الكنب والمفروشات</h3>
+          <p class="service-desc" data-i18n="service_5_desc">
+            إعادة النضارة والتعقيم لأقمشة أطقم الكنب، المجالس، والمراتب بتقنية الحقن والشفط والبخار الحار لإزالة أصعب البقع والروائح وقتل الجراثيم مع تجفيف فائق السرعة.
+          </p>
+          <ul class="service-features">
+            <li><i class="fa-solid fa-circle-check"></i> <span data-i18n="service_5_f1">غسيل فوري وسريع في موقعك دون الحاجة لنقل الأثاث</span></li>
+            <li><i class="fa-solid fa-circle-check"></i> <span data-i18n="service_5_f2">شامبوهات إيطالية وألمانية تزيل أصعب البقع والروائح</span></li>
+            <li><i class="fa-solid fa-circle-check"></i> <span data-i18n="service_5_f3">تعقيم حراري بالبخار يقضي على البكتيريا بنسبة 99.9%</span></li>
+          </ul>
+          <button onclick="selectServiceAndScroll('addon_sofa')" class="btn btn-outline btn-sm">
+            <span data-i18n="service_btn">تحديد المواصفات وطلب السعر</span>
+            <i class="fa-solid fa-arrow-left"></i>
+          </button>
+        </div>
+
+        <!-- Service 6: Deep Sanitization -->
+        <div class="service-card">
+          <div class="service-icon-wrap">
+            <i class="fa-solid fa-shield-virus"></i>
+          </div>
+          <h3 class="service-title" data-i18n="service_6_title">التعقيم والتطهير الشامل</h3>
+          <p class="service-desc" data-i18n="service_6_desc">
+            حماية متكاملة لعائلتك أو موظفيك. نستخدم تقنية الرذاذ البارد (ULV Fogging) والمطهرات الطبية المعتمدة للقضاء على الفيروسات والجراثيم في كافة الزوايا ونظام التهوية.
+          </p>
+          <ul class="service-features">
+            <li><i class="fa-solid fa-circle-check"></i> <span data-i18n="service_6_f1">آمن بنسبة 100% للأطفال والحيوانات الأليفة</span></li>
+            <li><i class="fa-solid fa-circle-check"></i> <span data-i18n="service_6_f2">تغطية لجميع الأسطح ومقابض الأبواب والمكيفات</span></li>
+            <li><i class="fa-solid fa-circle-check"></i> <span data-i18n="service_6_f3">شهادة تعقيم معتمدة للشركات والمنازل</span></li>
+          </ul>
+          <button onclick="selectServiceAndScroll('addon_sterilization')" class="btn btn-outline btn-sm">
+            <span data-i18n="service_btn">تحديد المواصفات وطلب السعر</span>
+            <i class="fa-solid fa-arrow-left"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Specifications & Direct Quote Calculator (NO FIXED PRICES) -->
+  <section id="calculator" class="section">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag">
+          <span class="sparkle-icon"></span>
+          <span data-i18n="calc_tag">طلب عرض سعر مخصص</span>
+        </div>
+        <h2 class="section-title" data-i18n="calc_title">حدد مواصفات شقتك واطلب عرض السعر فوراً عبر واتساب</h2>
+        <p class="section-subtitle" data-i18n="calc_subtitle">
+          اختر مواصفات مكانك والخدمات التي تحتاجها، وأرسل الطلب مباشرة إلى الواتساب ليقوم موظف خدمة العملاء بالرد عليك فوراً بأفضل سعر مخصص ومناسب لك.
+        </p>
+      </div>
+
+      <div class="calculator-card">
+        <div class="calculator-grid">
+          <!-- Calculator Form Inputs -->
+          <div class="calculator-form-area">
+            <!-- Step 1: Property Type & Details -->
+            <div class="calc-step">
+              <div class="calc-step-title">
+                <span class="calc-step-number">1</span>
+                <span data-i18n="calc_step1_title">نوع ومساحة العقار:</span>
+              </div>
+              <div class="calc-options-grid">
+                <div class="calc-option-btn calc-prop-btn" data-key="prop_studio">
+                  <i class="fa-solid fa-door-open"></i>
+                  <span data-i18n="prop_studio">استوديو / 1+1</span>
+                </div>
+                <div class="calc-option-btn calc-prop-btn selected" data-key="prop_2plus1">
+                  <i class="fa-solid fa-building"></i>
+                  <span data-i18n="prop_2plus1">شقة 2+1</span>
+                </div>
+                <div class="calc-option-btn calc-prop-btn" data-key="prop_3plus1">
+                  <i class="fa-solid fa-city"></i>
+                  <span data-i18n="prop_3plus1">شقة 3+1</span>
+                </div>
+                <div class="calc-option-btn calc-prop-btn" data-key="prop_4plus1">
+                  <i class="fa-solid fa-arrows-split-up-and-left"></i>
+                  <span data-i18n="prop_4plus1">شقة 4+1 فما فوق</span>
+                </div>
+                <div class="calc-option-btn calc-prop-btn" data-key="prop_villa">
+                  <i class="fa-solid fa-house-chimney-window"></i>
+                  <span data-i18n="prop_villa">فيلا أو دوبلكس</span>
+                </div>
+                <div class="calc-option-btn calc-prop-btn" data-key="prop_office">
+                  <i class="fa-solid fa-briefcase"></i>
+                  <span data-i18n="prop_office">مكتب أو مقر شركة</span>
+                </div>
+              </div>
+
+              <!-- Sub-options: Bathrooms & Balconies -->
+              <div class="calc-sub-wrapper">
+                <div>
+                  <label style="font-size: 0.82rem; font-weight: 700; color: var(--navy-primary); display: block; margin-bottom: 0.35rem;">
+                    <i class="fa-solid fa-bath" style="color: var(--teal-primary); margin-left: 0.35rem;"></i> <span data-i18n="calc_bath_label">عدد الحمامات:</span>
+                  </label>
+                  <div class="calc-sub-grid">
+                    <button type="button" class="calc-sub-btn calc-bath-btn" data-key="bath_1" data-i18n="bath_1">1 حمام</button>
+                    <button type="button" class="calc-sub-btn calc-bath-btn selected" data-key="bath_2" data-i18n="bath_2">2 حمام</button>
+                    <button type="button" class="calc-sub-btn calc-bath-btn" data-key="bath_3plus" data-i18n="bath_3plus">3+ حمامات</button>
+                  </div>
+                </div>
+                <div>
+                  <label style="font-size: 0.82rem; font-weight: 700; color: var(--navy-primary); display: block; margin-bottom: 0.35rem;">
+                    <i class="fa-solid fa-mountain-sun" style="color: var(--teal-primary); margin-left: 0.35rem;"></i> <span data-i18n="calc_balcony_label">الشرفات / البلكونات:</span>
+                  </label>
+                  <div class="calc-sub-grid">
+                    <button type="button" class="calc-sub-btn calc-balcony-btn" data-key="balcony_0" data-i18n="balcony_0">بدون</button>
+                    <button type="button" class="calc-sub-btn calc-balcony-btn selected" data-key="balcony_1" data-i18n="balcony_1">1 شرفة</button>
+                    <button type="button" class="calc-sub-btn calc-balcony-btn" data-key="balcony_2plus" data-i18n="balcony_2plus">2+ شرفات</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Step 2: Cleaning Type -->
+            <div class="calc-step">
+              <div class="calc-step-title">
+                <span class="calc-step-number">2</span>
+                <span data-i18n="calc_step2_title">مستوى ونوع خدمة التنظيف:</span>
+              </div>
+              <div class="calc-options-grid">
+                <div class="calc-option-btn calc-type-btn" data-key="type_regular">
+                  <i class="fa-solid fa-broom"></i>
+                  <span data-i18n="type_regular">تنظيف دوري عادي</span>
+                </div>
+                <div class="calc-option-btn calc-type-btn selected" data-key="type_deep">
+                  <i class="fa-solid fa-sparkles"></i>
+                  <span data-i18n="type_deep">تنظيف عميق فندقي</span>
+                </div>
+                <div class="calc-option-btn calc-type-btn" data-key="type_post_const">
+                  <i class="fa-solid fa-paint-roller"></i>
+                  <span data-i18n="type_post_const">ما بعد التشطيب والبناء</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Step 3: Addon Services (No Prices displayed) -->
+            <div class="calc-step">
+              <div class="calc-step-title">
+                <span class="calc-step-number">3</span>
+                <span data-i18n="calc_step3_title">خدمات إضافية مطلوبة (اختياري):</span>
+              </div>
+              <div class="calc-addons-grid">
+                <label class="addon-checkbox-label">
+                  <input type="checkbox" class="calc-addon-input" data-key="addon_sofa">
+                  <span data-i18n="addon_sofa">غسيل طقم كنب بالبخار</span>
+                </label>
+                <label class="addon-checkbox-label">
+                  <input type="checkbox" class="calc-addon-input" data-key="addon_express">
+                  <span data-i18n="addon_express">خدمة فورية مستعجلة في نفس اليوم</span>
+                </label>
+                <label class="addon-checkbox-label">
+                  <input type="checkbox" class="calc-addon-input" data-key="addon_appliances">
+                  <span data-i18n="addon_appliances">تنظيف داخلي عميق للفرن والثلاجة</span>
+                </label>
+                <label class="addon-checkbox-label">
+                  <input type="checkbox" class="calc-addon-input" data-key="addon_sterilization">
+                  <span data-i18n="addon_sterilization">تعقيم طبي شامل برذاذ ULV</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Step 4: Istanbul District, Date & Notes -->
+            <div class="calc-step" style="margin-bottom: 0;">
+              <div class="calc-step-title">
+                <span class="calc-step-number">4</span>
+                <span data-i18n="calc_step4_title">المنطقة في كافة مناطق اسطنبول والتاريخ المفضل:</span>
+              </div>
+              <div class="calc-date-district-wrapper">
+                <div>
+                  <select id="calcDistrict" class="calc-select">
+                    <optgroup id="optgroupEurope" data-i18n-label="calc_optgroup_europe" label="اسطنبول - الجانب الأوروبي">
+                      <option value="dist_basaksehir" data-i18n="dist_basaksehir" selected>باشاك شهير (Başakşehir)</option>
+                      <option value="dist_bahcesehir" data-i18n="dist_bahcesehir">باهتشه شهير (Bahçeşehir)</option>
+                      <option value="dist_kayasehir" data-i18n="dist_kayasehir">كايا شهير (Kayaşehir)</option>
+                      <option value="dist_beylikduzu" data-i18n="dist_beylikduzu">بيليك دوزو (Beylikdüzü)</option>
+                      <option value="dist_esenyurt" data-i18n="dist_esenyurt">إسنيورت (Esenyurt)</option>
+                      <option value="dist_maslak_sariyer" data-i18n="dist_maslak_sariyer">مسلك وساريير (Maslak & Sarıyer)</option>
+                      <option value="dist_sisli_bomonti" data-i18n="dist_sisli_bomonti">شيشلي وبومونتي (Şişli & Bomonti)</option>
+                      <option value="dist_levent_besiktas" data-i18n="dist_levent_besiktas">ليفنت وبيشكتاش (Levent & Beşiktaş)</option>
+                      <option value="dist_bakirkoy_atakoy" data-i18n="dist_bakirkoy_atakoy">بكركوي وأتاكوي (Bakırköy & Ataköy)</option>
+                      <option value="dist_fatih_zeytinburnu" data-i18n="dist_fatih_zeytinburnu">الفاتح وزيتون بورنو (Fatih & Zeytinburnu)</option>
+                      <option value="dist_avcilar" data-i18n="dist_avcilar">أفجلار (Avcılar)</option>
+                      <option value="dist_florya_yesilkoy" data-i18n="dist_florya_yesilkoy">فلوريا ويشيل كوي (Florya & Yeşilköy)</option>
+                      <option value="dist_kagithane" data-i18n="dist_kagithane">كاغتهانة (Kağıthane)</option>
+                      <option value="dist_beyoglu_taksim" data-i18n="dist_beyoglu_taksim">بيوغلو وتقسيم (Beyoğlu & Taksim)</option>
+                      <option value="dist_eyupsultan" data-i18n="dist_eyupsultan">أيوب سلطان (Eyüpsultan)</option>
+                      <option value="dist_kucukcekmece" data-i18n="dist_kucukcekmece">كوتشوك تشكمجه (Küçükçekmece)</option>
+                    </optgroup>
+                    <optgroup id="optgroupAsia" data-i18n-label="calc_optgroup_asia" label="اسطنبول - الجانب الآسيوي">
+                      <option value="dist_uskudar" data-i18n="dist_uskudar">أوسكودار (Üsküdar)</option>
+                      <option value="dist_kadikoy" data-i18n="dist_kadikoy">كاديكوي (Kadıköy)</option>
+                      <option value="dist_atasehir" data-i18n="dist_atasehir">أتاشهير (Ataşehir)</option>
+                      <option value="dist_maltepe" data-i18n="dist_maltepe">مالتبه (Maltepe)</option>
+                      <option value="dist_umraniye" data-i18n="dist_umraniye">عمرانية (Ümraniye)</option>
+                      <option value="dist_pendik_kartal" data-i18n="dist_pendik_kartal">بندك وكارتال (Pendik & Kartal)</option>
+                      <option value="dist_cekmekoy" data-i18n="dist_cekmekoy">تشكمه كوي (Çekmeköy)</option>
+                    </optgroup>
+                    <option value="calc_district_other" data-i18n="calc_district_other">منطقة أخرى في اسطنبول</option>
+                  </select>
+                </div>
+                <div>
+                  <input type="date" id="calcDate" class="calc-input">
+                </div>
+              </div>
+
+              <div>
+                <input type="text" id="calcNotes" class="calc-input" data-i18n-ph="calc_notes_ph" placeholder="أي ملاحظات أو متطلبات خاصة (اختياري)...">
+              </div>
+            </div>
+          </div>
+
+          <!-- Calculator Summary Sidebar (Quote Request Form - NO PRICES) -->
+          <div class="calculator-summary-area">
+            <div>
+              <h3 class="summary-title">
+                <i class="fa-solid fa-clipboard-check" style="color: var(--teal-light); margin-left: 0.5rem;"></i>
+                <span data-i18n="calc_sum_title">ملخص مواصفات طلبك</span>
+              </h3>
+
+              <ul class="summary-details">
+                <li>
+                  <span data-i18n="calc_sum_prop_label">نوع العقار:</span>
+                  <span id="sumProperty">شقة 2+1</span>
+                </li>
+                <li>
+                  <span data-i18n="calc_sum_details_label">التفاصيل:</span>
+                  <span id="sumSubDetails">2 حمام • 1 شرفة</span>
+                </li>
+                <li>
+                  <span data-i18n="calc_sum_type_label">مستوى الخدمة:</span>
+                  <span id="sumType">تنظيف عميق فندقي</span>
+                </li>
+                <li>
+                  <span data-i18n="calc_sum_district_label">المنطقة:</span>
+                  <span id="sumDistrict">باشاك شهير (Başakşehir)</span>
+                </li>
+                <li>
+                  <span data-i18n="calc_sum_addons_label">الخدمات الإضافية:</span>
+                  <span id="sumAddons" style="max-width: 170px; text-align: left; font-size: 0.82rem;" data-i18n="calc_sum_no_addons">لا توجد إضافات</span>
+                </li>
+              </ul>
+
+              <!-- Custom Quote Notification Box -->
+              <div class="custom-quote-box">
+                <i class="fa-solid fa-comments-dollar"></i>
+                <div class="custom-quote-title" data-i18n="calc_quote_title">عرض سعر مخصص ومباشر</div>
+                <div class="custom-quote-desc" data-i18n="calc_quote_desc">
+                  سيقوم موظف خدمة العملاء بدراسة مواصفات طلبك فوراً وتزويدك بأفضل سعر مخصص ومناسب لك عبر واتساب.
+                </div>
+              </div>
+            </div>
+
+            <!-- WhatsApp Booking Action -->
+            <div>
+              <a id="calcBookWhatsApp" href="#" target="_blank" class="btn btn-whatsapp btn-book-whatsapp">
+                <i class="fa-brands fa-whatsapp" style="font-size: 1.35rem;"></i>
+                <span data-i18n="calc_book_whatsapp">إرسال المواصفات للواتساب للرد بالسعر</span>
+              </a>
+              <p style="text-align: center; font-size: 0.78rem; color: rgba(255,255,255,0.7); margin-top: 0.75rem;">
+                <i class="fa-solid fa-shield-check" style="color: var(--teal-light);"></i>
+                <span data-i18n="calc_book_subtext">سيتم فتح محادثة واتساب مجهزة بكامل المواصفات لمتابعتها مع الموظف</span>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Before / After Interactive Slider Section -->
+  <section id="before-after" class="section section-alt">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag">
+          <span class="sparkle-icon"></span>
+          <span data-i18n="ba_tag">نتائجنا تتحدث عنا</span>
+        </div>
+        <h2 class="section-title" data-i18n="ba_title">شاهد الفرق الحقيقي قبل وبعد خدمات تميزو</h2>
+        <p class="section-subtitle" data-i18n="ba_subtitle">
+          اسحب المؤشر لليمين أو اليسار لترى كيف نحول الأماكن المليئة بالبقع والأتربة إلى مساحات تشع نقاءً ونظافة فندقية باهرة.
+        </p>
+      </div>
+
+      <div class="before-after-wrapper">
+        <div class="ba-container">
+          <div class="ba-image after-img"></div>
+          <div class="ba-image before-img"></div>
+          <span class="ba-label label-after" data-i18n="ba_label_after">بعد التنظيف (TEMiZO ✨)</span>
+          <span class="ba-label label-before" data-i18n="ba_label_before">قبل التنظيف</span>
+          
+          <div class="ba-handle">
+            <div class="ba-handle-line"></div>
+            <div class="ba-handle-circle">
+              <i class="fa-solid fa-arrows-left-right"></i>
+            </div>
+          </div>
+
+          <input type="range" min="0" max="100" value="50" class="ba-range-slider" data-i18n-aria="ba_slider_aria" aria-label="شريط مقارنة قبل وبعد">
+        </div>
+        <p class="ba-tips">
+          <i class="fa-solid fa-hand-pointer" style="color: var(--teal-primary);"></i> <span data-i18n="ba_tips">اسحب الدائرة في المنتصف لمعاينة الفرق بين النظافة قبل وبعد التدخل الاحترافي</span>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Choose TEMiZO Section -->
+  <section id="why-us" class="section">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag">
+          <span class="sparkle-icon"></span>
+          <span data-i18n="why_tag">قيمنا ومعاييرنا</span>
+        </div>
+        <h2 class="section-title" data-i18n="why_title">لماذا يختار آلاف العائلات والشركات "تميزو" في كافة مناطق اسطنبول؟</h2>
+        <p class="section-subtitle" data-i18n="why_subtitle">
+          نحن لا نكتفي بالتنظيف السطحي، بل نضع بين يديك ثقة مطلقة وتجربة مريحة وممتعة تضمن لك ولأسرتك بيئة معقمة ومبهجة.
+        </p>
+      </div>
+
+      <div class="features-grid">
+        <div class="feature-item">
+          <div class="feature-icon-box">
+            <i class="fa-solid fa-id-card-clip"></i>
+          </div>
+          <h3 class="feature-title" data-i18n="why_1_title">كوادر موثوقة ومفحوصة أمنياً</h3>
+          <p class="feature-desc" data-i18n="why_1_desc">
+            أمان منزلك هو أولويتنا. جميع أفراد طاقمنا يخضعون لتدقيق أمني شامل، فحص للسوابق، وتدريب احترافي على اللباقة واحترام الخصوصية التامة.
+          </p>
+        </div>
+
+        <div class="feature-item">
+          <div class="feature-icon-box">
+            <i class="fa-solid fa-flask-vial"></i>
+          </div>
+          <h3 class="feature-title" data-i18n="why_2_title">مواد تعقيم أوروبية معتمدة</h3>
+          <p class="feature-desc" data-i18n="why_2_desc">
+            نستخدم منظفات ومطهرات صديقة للبيئة والحيوانات الأليفة، خالية من الروائح الكيميائية الخانقة، ومطابقة لأعلى المواصفات الصحية الأوروبية.
+          </p>
+        </div>
+
+        <div class="feature-item">
+          <div class="feature-icon-box">
+            <i class="fa-solid fa-bolt-lightning"></i>
+          </div>
+          <h3 class="feature-title" data-i18n="why_3_title">سرعة فائقة وخدمة فورية</h3>
+          <p class="feature-desc" data-i18n="why_3_desc">
+            طواقم متأهبة وسيارات مجهزة للانطلاق الفوري لكافة مناطق اسطنبول. نضمن لك سرعة الاستجابة وإنجاز التنظيف في وقت قياسي بأعلى درجات الإتقان.
+          </p>
+        </div>
+
+        <div class="feature-item">
+          <div class="feature-icon-box">
+            <i class="fa-solid fa-stopwatch-20"></i>
+          </div>
+          <h3 class="feature-title" data-i18n="why_4_title">انضباط صارم في المواعيد</h3>
+          <p class="feature-desc" data-i18n="why_4_desc">
+            نقدر قيمة وقتك. فريقنا يصل في الموعد المحدد تماماً مع كافة أجهزته ومعداته، وينجز مهام التنظيف في الوقت القياسي المتفق عليه.
+          </p>
+        </div>
+
+        <div class="feature-item">
+          <div class="feature-icon-box">
+            <i class="fa-solid fa-spray-can-sparkles"></i>
+          </div>
+          <h3 class="feature-title" data-i18n="why_5_title">أحدث أجهزة البخار والشفط</h3>
+          <p class="feature-desc" data-i18n="why_5_desc">
+            نستثمر في أحدث ماكينات التنظيف الإيطالية والألمانية، بما في ذلك أجهزة البخار عالي الضغط ومكانس الرذاذ الدقيق للتطهير والتعقيم العميق.
+          </p>
+        </div>
+
+        <div class="feature-item">
+          <div class="feature-icon-box">
+            <i class="fa-solid fa-hand-holding-dollar"></i>
+          </div>
+          <h3 class="feature-title" data-i18n="why_6_title">شفافية الأسعار والدفع بعد الرضا</h3>
+          <p class="feature-desc" data-i18n="why_6_desc">
+            أسعار واضحة ومحددة بدون أي مفاجآت أو تكاليف مستترة. يتم الدفع فقط بعد تفقدك لمنزلك وتأكدك التام من إتقان كل زاوية وتفصيلة.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Istanbul Comprehensive & Fast Coverage Section (All Istanbul) -->
+  <section id="coverage" class="section section-alt">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag">
+          <span class="sparkle-icon"></span>
+          <span data-i18n="coverage_tag">خدمة فورية وسريعة</span>
+        </div>
+        <h2 class="section-title" data-i18n="coverage_title">تغطية فورية وشاملة لكافة مناطق وأحياء اسطنبول</h2>
+        <p class="section-subtitle" data-i18n="coverage_subtitle">
+          فرق عملنا المتنقلة مجهزة بأحدث الأجهزة الأوروبية ومستعدة للوصول الفوري إلى منزلك أو مقر عملك في جميع مناطق اسطنبول بشقيها الأوروبي والآسيوي في أسرع وقت. انقر على منطقتك لتحديدها في الطلب فوراً.
+        </p>
+      </div>
+
+      <div class="coverage-tabs-wrapper">
+        <!-- All Istanbul Districts Grid -->
+        <div id="europeDistricts" class="districts-grid">
+          <div class="district-card" data-key="dist_basaksehir">
+            <span class="district-name"><i class="fa-solid fa-location-dot" style="color: var(--teal-primary); margin-left: 0.5rem;"></i> <span data-i18n="dist_basaksehir">باشاك شهير (Başakşehir)</span></span>
+            <span class="district-badge" data-i18n="badge_instant">فوري</span>
+          </div>
+          <div class="district-card" data-key="dist_bahcesehir">
+            <span class="district-name"><i class="fa-solid fa-location-dot" style="color: var(--teal-primary); margin-left: 0.5rem;"></i> <span data-i18n="dist_bahcesehir">باهتشه شهير (Bahçeşehir)</span></span>
+            <span class="district-badge" data-i18n="badge_instant">فوري</span>
+          </div>
+          <div class="district-card" data-key="dist_kayasehir">
+            <span class="district-name"><i class="fa-solid fa-location-dot" style="color: var(--teal-primary); margin-left: 0.5rem;"></i> <span data-i18n="dist_kayasehir">كايا شهير (Kayaşehir)</span></span>
+            <span class="district-badge" data-i18n="badge_instant">فوري</span>
+          </div>
+          <div class="district-card" data-key="dist_beylikduzu">
+            <span class="district-name"><i class="fa-solid fa-location-dot" style="color: var(--teal-primary); margin-left: 0.5rem;"></i> <span data-i18n="dist_beylikduzu">بيليك دوزو (Beylikdüzü)</span></span>
+            <span class="district-badge" data-i18n="badge_instant">فوري</span>
+          </div>
+          <div class="district-card" data-key="dist_esenyurt">
+            <span class="district-name"><i class="fa-solid fa-location-dot" style="color: var(--teal-primary); margin-left: 0.5rem;"></i> <span data-i18n="dist_esenyurt">إسنيورت (Esenyurt)</span></span>
+            <span class="district-badge" data-i18n="badge_instant">فوري</span>
+          </div>
+          <div class="district-card" data-key="dist_maslak_sariyer">
+            <span class="district-name"><i class="fa-solid fa-location-dot" style="color: var(--teal-primary); margin-left: 0.5rem;"></i> <span data-i18n="dist_maslak_sariyer">مسلك وساريير (Maslak & Sarıyer)</span></span>
+            <span class="district-badge" data-i18n="badge_instant">فوري</span>
+          </div>
+          <div class="district-card" data-key="dist_sisli_bomonti">
+            <span class="district-name"><i class="fa-solid fa-location-dot" style="color: var(--teal-primary); margin-left: 0.5rem;"></i> <span data-i18n="dist_sisli_bomonti">شيشلي وبومونتي (Şişli & Bomonti)</span></span>
+            <span class="district-badge" data-i18n="badge_instant">فوري</span>
+          </div>
+          <div class="district-card" data-key="dist_levent_besiktas">
+            <span class="district-name"><i class="fa-solid fa-location-dot" style="color: var(--teal-primary); margin-left: 0.5rem;"></i> <span data-i18n="dist_levent_besiktas">ليفنت وبيشكتاش (Levent & Beşiktaş)</span></span>
+            <span class="district-badge" data-i18n="badge_instant">فوري</span>
+          </div>
+          <div class="district-card" data-key="dist_bakirkoy_atakoy">
+            <span class="district-name"><i class="fa-solid fa-location-dot" style="color: var(--teal-primary); margin-left: 0.5rem;"></i> <span data-i18n="dist_bakirkoy_atakoy">بكركوي وأتاكوي (Bakırköy & Ataköy)</span></span>
+            <span class="district-badge" data-i18n="badge_instant">فوري</span>
+          </div>
+          <div class="district-card" data-key="dist_fatih_zeytinburnu">
+            <span class="district-name"><i class="fa-solid fa-location-dot" style="color: var(--teal-primary); margin-left: 0.5rem;"></i> <span data-i18n="dist_fatih_zeytinburnu">الفاتح وزيتون بورنو (Fatih & Zeytinburnu)</span></span>
+            <span class="district-badge" data-i18n="badge_instant">فوري</span>
+          </div>
+          <div class="district-card" data-key="dist_avcilar">
+            <span class="district-name"><i class="fa-solid fa-location-dot" style="color: var(--teal-primary); margin-left: 0.5rem;"></i> <span data-i18n="dist_avcilar">أفجلار (Avcılar)</span></span>
+            <span class="district-badge" data-i18n="badge_instant">فوري</span>
+          </div>
+          <div class="district-card" data-key="dist_florya_yesilkoy">
+            <span class="district-name"><i class="fa-solid fa-location-dot" style="color: var(--teal-primary); margin-left: 0.5rem;"></i> <span data-i18n="dist_florya_yesilkoy">فلوريا ويشيل كوي (Florya & Yeşilköy)</span></span>
+            <span class="district-badge" data-i18n="badge_vip">VIP</span>
+          </div>
+          <div class="district-card" data-key="dist_kagithane">
+            <span class="district-name"><i class="fa-solid fa-location-dot" style="color: var(--teal-primary); margin-left: 0.5rem;"></i> <span data-i18n="dist_kagithane">كاغتهانة (Kağıthane)</span></span>
+            <span class="district-badge" data-i18n="badge_instant">فوري</span>
+          </div>
+          <div class="district-card" data-key="dist_beyoglu_taksim">
+            <span class="district-name"><i class="fa-solid fa-location-dot" style="color: var(--teal-primary); margin-left: 0.5rem;"></i> <span data-i18n="dist_beyoglu_taksim">بيوغلو وتقسيم (Beyoğlu & Taksim)</span></span>
+            <span class="district-badge" data-i18n="badge_instant">فوري</span>
+          </div>
+          <div class="district-card" data-key="dist_eyupsultan">
+            <span class="district-name"><i class="fa-solid fa-location-dot" style="color: var(--teal-primary); margin-left: 0.5rem;"></i> <span data-i18n="dist_eyupsultan">أيوب سلطان (Eyüpsultan)</span></span>
+            <span class="district-badge" data-i18n="badge_instant">فوري</span>
+          </div>
+          <div class="district-card" data-key="dist_kucukcekmece">
+            <span class="district-name"><i class="fa-solid fa-location-dot" style="color: var(--teal-primary); margin-left: 0.5rem;"></i> <span data-i18n="dist_kucukcekmece">كوتشوك تشكمجه (Küçükçekmece)</span></span>
+            <span class="district-badge" data-i18n="badge_instant">فوري</span>
+          </div>
+          <div class="district-card" data-key="dist_uskudar">
+            <span class="district-name"><i class="fa-solid fa-location-dot" style="color: var(--teal-primary); margin-left: 0.5rem;"></i> <span data-i18n="dist_uskudar">أوسكودار (Üsküdar)</span></span>
+            <span class="district-badge" data-i18n="badge_instant">فوري</span>
+          </div>
+          <div class="district-card" data-key="dist_kadikoy">
+            <span class="district-name"><i class="fa-solid fa-location-dot" style="color: var(--teal-primary); margin-left: 0.5rem;"></i> <span data-i18n="dist_kadikoy">كاديكوي (Kadıköy)</span></span>
+            <span class="district-badge" data-i18n="badge_instant">فوري</span>
+          </div>
+          <div class="district-card" data-key="dist_atasehir">
+            <span class="district-name"><i class="fa-solid fa-location-dot" style="color: var(--teal-primary); margin-left: 0.5rem;"></i> <span data-i18n="dist_atasehir">أتاشهير (Ataşehir)</span></span>
+            <span class="district-badge" data-i18n="badge_instant">فوري</span>
+          </div>
+          <div class="district-card" data-key="dist_maltepe">
+            <span class="district-name"><i class="fa-solid fa-location-dot" style="color: var(--teal-primary); margin-left: 0.5rem;"></i> <span data-i18n="dist_maltepe">مالتبه (Maltepe)</span></span>
+            <span class="district-badge" data-i18n="badge_instant">فوري</span>
+          </div>
+          <div class="district-card" data-key="dist_umraniye">
+            <span class="district-name"><i class="fa-solid fa-location-dot" style="color: var(--teal-primary); margin-left: 0.5rem;"></i> <span data-i18n="dist_umraniye">عمرانية (Ümraniye)</span></span>
+            <span class="district-badge" data-i18n="badge_instant">فوري</span>
+          </div>
+          <div class="district-card" data-key="dist_pendik_kartal">
+            <span class="district-name"><i class="fa-solid fa-location-dot" style="color: var(--teal-primary); margin-left: 0.5rem;"></i> <span data-i18n="dist_pendik_kartal">بندك وكارتال (Pendik & Kartal)</span></span>
+            <span class="district-badge" data-i18n="badge_instant">فوري</span>
+          </div>
+          <div class="district-card" data-key="dist_cekmekoy">
+            <span class="district-name"><i class="fa-solid fa-location-dot" style="color: var(--teal-primary); margin-left: 0.5rem;"></i> <span data-i18n="dist_cekmekoy">تشكمه كوي (Çekmeköy)</span></span>
+            <span class="district-badge" data-i18n="badge_instant">فوري</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Client Testimonials Section -->
+  <section id="testimonials" class="section">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag">
+          <span class="sparkle-icon"></span>
+          <span data-i18n="testi_tag">آراء وتجارب حقيقية</span>
+        </div>
+        <h2 class="section-title" data-i18n="testi_title">ماذا يقول عملاؤنا الكرام في كافة مناطق اسطنبول؟</h2>
+        <p class="section-subtitle" data-i18n="testi_subtitle">
+          نفخر برضا وسعادة عملائنا في مختلف مجمعات وأحياء اسطنبول، ونسعى دائماً لتقديم تجربة تنظيف فندقية تتجاوز توقعاتك.
+        </p>
+      </div>
+
+      <div class="testimonials-grid">
+        <div class="testimonial-card">
+          <div>
+            <div class="testi-stars">
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+            </div>
+            <p class="testi-text" data-i18n="testi_1_text">
+              "تعاملت مع العديد من شركات التنظيف في اسطنبول لكن تميزو بصراحة في مستوى آخر تماماً! طاقم العمل محترم جداً بزي رسمي أنيق، نظافة المطبخ والحمامات أصبحت مثل الفنادق 5 نجوم. شكراً لكم على هذا الالتزام."
+            </p>
+          </div>
+          <div class="testi-author">
+            <div class="author-avatar" data-i18n="testi_1_avatar">أ.ش</div>
+            <div class="author-info">
+              <h4 data-i18n="testi_1_author">أحمد الشمري</h4>
+              <span data-i18n="testi_1_loc">باشاك شهير - كمبوند فينيسيا</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <div>
+            <div class="testi-stars">
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+            </div>
+            <p class="testi-text" data-i18n="testi_2_text">
+              "طلبنا خدمة تنظيف ما بعد التشطيب لشقتنا الجديدة في مسلك، كانت مليئة ببقايا الدهان والأسمنت. فريق تميزو أزال كل أثر بدقة متناهية ولمع الرخام والشبابيك بطريقة مذهلة وسكنا في نفس اليوم ونحن مرتاحين."
+            </p>
+          </div>
+          <div class="testi-author">
+            <div class="author-avatar" data-i18n="testi_2_avatar">س.م</div>
+            <div class="author-info">
+              <h4 data-i18n="testi_2_author">سارة المهدي</h4>
+              <span data-i18n="testi_2_loc">مسلك - مجمع مسلك 1453</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <div>
+            <div class="testi-stars">
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+            </div>
+            <p class="testi-text" data-i18n="testi_3_text">
+              "لدينا شركة استشارات هندسية في بيليك دوزو وتعاقدنا مع تميزو للتنظيف الأسبوعي الدوري. الدقة في المواعيد، الأمانة، والاهتمام بالأجهزة والشاشات ممتاز جداً. أنصح بهم بشدة لأي شركة تبحث عن الاحترافية."
+            </p>
+          </div>
+          <div class="testi-author">
+            <div class="author-avatar" data-i18n="testi_3_avatar">م.ك</div>
+            <div class="author-info">
+              <h4 data-i18n="testi_3_author">م. كنان العلي</h4>
+              <span data-i18n="testi_3_loc">بيليك دوزو - غرب مارينا</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section (Accordion) -->
+  <section id="faq" class="section section-alt">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag">
+          <span class="sparkle-icon"></span>
+          <span data-i18n="faq_tag">إجابات واضحة</span>
+        </div>
+        <h2 class="section-title" data-i18n="faq_title">الأسئلة الأكثر شيوعاً</h2>
+        <p class="section-subtitle" data-i18n="faq_subtitle">
+          جمعنا لك أهم الأسئلة التي يطرحها عملاؤنا لتكون على دراية تامة بكافة تفاصيل وآلية عملنا.
+        </p>
+      </div>
+
+      <div class="faq-accordion">
+        <div class="faq-item active">
+          <div class="faq-header">
+            <span data-i18n="faq_1_q">هل تقدمون خدماتكم في كامل اسطنبول أم مناطق محددة؟</span>
+            <i class="fa-solid fa-chevron-down faq-icon"></i>
+          </div>
+          <div class="faq-body" data-i18n="faq_1_a">
+            نعم، نقدم خدماتنا الفورية في <strong>كافة مناطق وأحياء اسطنبول بشقيها الأوروبي والآسيوي</strong> (باشاك شهير، بيليك دوزو، شيشلي، مسلك، باهتشه شهير، كاديكوي، أوسكودار، أتاشهير، وغيرها). فرقنا المتنقلة موزعة استراتيجياً لتصل إليك في أسرع وقت بنفس اليوم وبأعلى درجات الجودة والاحترافية.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-header">
+            <span data-i18n="faq_2_q">كيف أعرف سعر تنظيف شقتي أو مكتبي؟</span>
+            <i class="fa-solid fa-chevron-down faq-icon"></i>
+          </div>
+          <div class="faq-body" data-i18n="faq_2_a">
+            بكل سهولة! يمكنك تحديد مواصفات شقتك (عدد الغرف، الحمامات، الشرفات، والخدمات الإضافية) في حاسبة الطلب أعلاه، ثم النقر على زر الواتساب؛ حيث يقوم موظف خدمة العملاء بالرد عليك مباشرة وتزويدك بعرض سعر مخصص ودقيق يناسب طلبك.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-header">
+            <span data-i18n="faq_3_q">هل تحضرون معكم كافة مواد وأجهزة التنظيف؟</span>
+            <i class="fa-solid fa-chevron-down faq-icon"></i>
+          </div>
+          <div class="faq-body" data-i18n="faq_3_a">
+            نعم، بالتأكيد! فريق تميزو يحضر ومعه جميع المعدات الاحترافية (مكانس صناعية، أجهزة البخار، مماسح معقمة جديدة لكل عميل، وسوائل تنظيف ومطهرات ألمانية وتركية ذات جودة عالية)، ولا تحتاج لتوفير أي شيء من طرفك.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-header">
+            <span data-i18n="faq_4_q">كيف تتم طريقة الدفع وما هي العملات المتاحة؟</span>
+            <i class="fa-solid fa-chevron-down faq-icon"></i>
+          </div>
+          <div class="faq-body" data-i18n="faq_4_a">
+            الدفع يتم بكل بساطة بعد انتهاء جلسة التنظيف وتفقدك للمكان والتأكد من رضاك التام. يمكنك الدفع نقداً بالليرة التركية أو الدولار أو اليورو، أو من خلال التحويل البنكي الفوري (Havale / EFT).
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-header">
+            <span data-i18n="faq_5_q">هل كوادر التنظيف لديكم موثوقون وأمناء؟</span>
+            <i class="fa-solid fa-chevron-down faq-icon"></i>
+          </div>
+          <div class="faq-body" data-i18n="faq_5_a">
+            هذا هو الأساس الذي بنينا عليه سمعة تميزو في اسطنبول. كل عامل وعاملة يخضعون للتحقق الأمني الدقيق والتدريب المكثف على أمانة الممتلكات والالتزام بأعلى معايير الحشمة والأخلاق والخصوصية.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-header">
+            <span data-i18n="faq_6_q">هل تقدمون اشتراكات وباقات تنظيف دورية؟</span>
+            <i class="fa-solid fa-chevron-down faq-icon"></i>
+          </div>
+          <div class="faq-body" data-i18n="faq_6_a">
+            نعم، نوفر باقات تنظيف أسبوعية ونصف شهرية وشهرية بخصومات خاصة للشقق السكنية والفلل والمكاتب في كافة مناطق اسطنبول مع إمكانية تثبيت نفس الكادر المفضل لديك للمواعيد اللاحقة.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA Callout -->
+  <section class="section" style="padding-top: 2rem;">
+    <div class="container">
+      <div class="cta-banner-card">
+        <h2 class="cta-title" data-i18n="cta_title">جاهز لتجربة نظافة استثنائية لمنزلك أو مكتبك؟</h2>
+        <p class="cta-subtitle" data-i18n="cta_subtitle">
+          احجز موعدك الآن عبر واتساب بنقرة واحدة، واستمتع ببيئة نظيفة، منعشة، ومعقمة بالكامل وبخدمة فورية فائقة السرعة في كافة مناطق اسطنبول.
+        </p>
+        <div class="cta-buttons">
+          <a href="https://wa.me/905435110530?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%20%D8%AA%D9%85%D9%8A%D8%B2%D9%88%D8%8C%20%D8%A3%D9%88%D8%AF%20%D8%AD%D8%AC%D8%B2%20%D9%85%D9%88%D8%B9%D8%AF%20%D8%AA%D9%86%D8%B8%D9%8A%D9%81%20%D9%81%D9%88%D8%B1%D9%8A" target="_blank" class="btn btn-whatsapp btn-lg">
+            <i class="fa-brands fa-whatsapp" style="font-size: 1.4rem;"></i>
+            <span data-i18n="cta_whatsapp">راسلنا على واتساب الآن</span>
+          </a>
+          <a href="tel:+905435110530" class="btn btn-outline-white btn-lg">
+            <i class="fa-solid fa-phone"></i>
+            <span data-i18n="cta_call">اتصال هاتفي مباشر</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <!-- Footer Column 1: Brand Info -->
+        <div class="footer-brand">
+          <div class="brand-logo-container" style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.12); padding: 0.6rem 1rem; border-radius: var(--radius-md); display: inline-flex; align-items: center; gap: 0.9rem;">
+            <img src="assets/images/logo.jpg" alt="TEMiZO" class="brand-logo-img" style="background: #ffffff; padding: 3px; border-radius: var(--radius-sm); height: 50px;">
+            <div class="brand-logo-text">
+              <div class="brand-logo-title" style="color: #fff;">TEM<span style="color: var(--teal-light);">i</span>ZO</div>
+              <div class="brand-logo-desc" style="color: var(--teal-light);">PROFESYONEL TEMİZLİK</div>
+            </div>
+          </div>
+          <p data-i18n="footer_brand_desc">
+            تميزو لخدمات التنظيف الاحترافية والفورية في كافة مناطق اسطنبول. نجمع بين السرعة القصوى، الأمانة التامة، والتقنيات الحديثة لنمنحك بيئة مريحة ومعقمة تفوق توقعاتك وبنسبة رضا زبائن تصل إلى 98%.
+          </p>
+        </div>
+
+        <!-- Footer Column 2: Quick Links -->
+        <div>
+          <h4 class="footer-title" data-i18n="footer_quick_links_title">روابط سريعة</h4>
+          <ul class="footer-links">
+            <li><a href="#home" data-i18n="footer_link_home">الرئيسية</a></li>
+            <li><a href="#services" data-i18n="footer_link_services">خدماتنا المتخصصة</a></li>
+            <li><a href="#calculator" data-i18n="footer_link_calc">طلب عرض السعر</a></li>
+            <li><a href="#before-after" data-i18n="footer_link_ba">نتائج قبل وبعد</a></li>
+            <li><a href="#coverage" data-i18n="footer_link_coverage">تغطية مناطق اسطنبول</a></li>
+            <li><a href="#faq" data-i18n="footer_link_faq">الأسئلة الشائعة</a></li>
+          </ul>
+        </div>
+
+        <!-- Footer Column 3: Services -->
+        <div>
+          <h4 class="footer-title" data-i18n="footer_services_title">خدمات التنظيف</h4>
+          <ul class="footer-links">
+            <li><a href="#services" data-i18n="footer_s1">تنظيف الشقق والمنازل</a></li>
+            <li><a href="#services" data-i18n="footer_s2">تنظيف الفلل والقصور</a></li>
+            <li><a href="#services" data-i18n="footer_s3">تنظيف المكاتب والشركات</a></li>
+            <li><a href="#services" data-i18n="footer_s4">تنظيف ما بعد البناء والتشطيب</a></li>
+            <li><a href="#services" data-i18n="footer_s5">غسيل وتعقيم الكنب والمفروشات</a></li>
+            <li><a href="#services" data-i18n="footer_s6">التعقيم والتطهير الشامل</a></li>
+          </ul>
+        </div>
+
+        <!-- Footer Column 4: Contact & Location -->
+        <div>
+          <h4 class="footer-title" data-i18n="footer_contact_title">تواصل معنا</h4>
+          <ul class="footer-contact-list">
+            <li>
+              <i class="fa-solid fa-location-dot"></i>
+              <span data-i18n="footer_contact_loc">كافة مناطق اسطنبول - تركيا (تغطية شاملة وفورية)</span>
+            </li>
+            <li>
+              <i class="fa-solid fa-phone"></i>
+              <a href="tel:+905435110530" dir="ltr" style="color: inherit;">+90 543 511 0530</a>
+            </li>
+            <li>
+              <i class="fa-brands fa-whatsapp"></i>
+              <a href="https://wa.me/905435110530" target="_blank" dir="ltr" style="color: inherit;">+90 543 511 0530</a>
+            </li>
+            <li>
+              <i class="fa-regular fa-clock"></i>
+              <span data-i18n="footer_contact_hours">طيلة أيام الأسبوع من 08:00 صباحاً حتى 08:00 مساءً</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Footer Bottom -->
+      <div class="footer-bottom">
+        <div data-i18n="footer_copyright">
+          جميع الحقوق محفوظة &copy; 2026 <strong>تميزو (TEMiZO Profesyonel Temizlik)</strong> - كافة مناطق اسطنبول
+        </div>
+        <div style="display: flex; gap: 1.5rem;">
+          <a href="#" style="color: var(--gray-500); font-size: 0.82rem;" data-i18n="footer_privacy">سياسة الخصوصية</a>
+          <a href="#" style="color: var(--gray-500); font-size: 0.82rem;" data-i18n="footer_terms">شروط الخدمة</a>
+          <a href="#home" style="color: var(--teal-light); font-size: 0.82rem;"><span data-i18n="footer_back_to_top">العودة للأعلى</span> <i class="fa-solid fa-arrow-up"></i></a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Floating WhatsApp Widget -->
+  <div class="floating-whatsapp-btn" id="floatingWhatsApp" data-i18n-title="tooltip_whatsapp" title="تواصل معنا عبر واتساب">
+    <i class="fa-brands fa-whatsapp"></i>
+  </div>
+
+  <!-- WhatsApp Quick Chat Modal -->
+  <div class="quick-chat-modal" id="quickChatModal">
+    <div class="chat-modal-header">
+      <div class="chat-modal-user">
+        <img src="assets/images/logo.jpg" alt="TEMiZO">
+        <div>
+          <strong style="display: block; font-size: 0.95rem;" data-i18n="chat_agent_name">خدمة عملاء تميزو</strong>
+          <span style="font-size: 0.75rem; color: var(--teal-light);" data-i18n="chat_agent_status">متواجدون الآن للرد عليك 🟢</span>
+        </div>
+      </div>
+      <button class="chat-close-btn" id="chatCloseBtn">&times;</button>
+    </div>
+
+    <div class="chat-modal-body">
+      <div class="chat-bubble">
+        <span data-i18n="chat_msg">مرحباً بك في تميزو لخدمات التنظيف الفورية في كافة مناطق اسطنبول! 👋<br>كيف يمكننا مساعدتك اليوم؟ يسعدنا الإجابة على أي استفسار وتزويدك بعرض سعر فوري وسريع لشقتك أو مكتبك.</span>
+        <span class="chat-bubble-time" data-i18n="chat_time_now">الآن</span>
+      </div>
+
+      <a href="https://wa.me/905435110530?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%20%D8%AA%D9%85%D9%8A%D8%B2%D9%88%D8%8C%20%D8%A3%D9%88%D8%AF%20%D8%A7%D9%84%D8%A7%D8%B3%D8%AA%D9%81%D8%B3%D8%A7%D8%B1%20%D8%B9%D9%86%20%D8%AE%D8%AF%D9%85%D8%A7%D8%AA%20%D8%A7%D9%84%D8%AA%D9%86%D8%B8%D9%8A%D9%81%20%D8%A7%D9%84%D9%81%D9%88%D8%B1%D9%8A%D8%A9%20%D9%81%D9%8A%20%D8%A7%D8%B3%D8%B7%D9%86%D8%A8%D9%88%D9%84" target="_blank" class="btn btn-whatsapp chat-start-btn">
+        <i class="fa-brands fa-whatsapp" style="font-size: 1.25rem;"></i>
+        <span data-i18n="chat_start_btn">بدء المحادثة في واتساب</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- Back to Top Button -->
+  <div class="back-to-top" id="backToTop" data-i18n-title="tooltip_back_to_top" title="العودة للأعلى">
+    <i class="fa-solid fa-arrow-up"></i>
+  </div>
+
+  <!-- Three.js 3D WebGL Library (Local fast load with CDN fallback) -->
+  <script src="js/three.min.js"></script>
+  <script>
+    if (typeof THREE === 'undefined') {
+      document.write('<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"><\\/script>');
+    }
+  </script>
+  <!-- Multilingual Localization Dictionary -->
+  <script src="js/translations.js"></script>
+  <!-- Main Interactive Engine -->
+  <script src="js/main.js"></script>
+</body>
+</html>
+"""
+
+out_path = os.path.join(os.path.dirname(__file__), "index.html")
+with open(out_path, "w", encoding="utf-8") as f:
+    f.write(html_content)
+
+print(f"Successfully generated tagged {out_path}")
