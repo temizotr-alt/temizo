@@ -978,6 +978,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .calculator-form-area {
   padding: 3.5rem;
+  min-width: 0;
 }
 
 .calc-step {
@@ -1099,6 +1100,7 @@ h1, h2, h3, h4, h5, h6 {
   background: linear-gradient(160deg, var(--navy-primary) 0%, var(--navy-dark) 100%);
   color: var(--white);
   padding: 3.5rem 2.5rem;
+  min-width: 0;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -1394,6 +1396,8 @@ h1, h2, h3, h4, h5, h6 {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 0.5rem;
+  min-width: 0;
   transition: all var(--transition-fast);
   cursor: pointer;
 }
@@ -1408,6 +1412,8 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 600;
   font-size: 0.95rem;
   color: var(--navy-primary);
+  min-width: 0;
+  overflow-wrap: anywhere;
 }
 
 .district-badge {
@@ -2140,10 +2146,7 @@ h1, h2, h3, h4, h5, h6 {
 .hero-section,
 .stats-banner,
 .section,
-.site-footer,
-.floating-whatsapp-btn,
-.quick-chat-modal,
-.back-to-top {
+.site-footer {
   position: relative;
   z-index: 2;
 }
